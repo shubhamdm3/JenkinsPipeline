@@ -13,7 +13,7 @@ pipeline {
     stage('Build Stage') {
       steps {
         echo '********* Build Stage Started **********'
-        sh 'pip install -r requirements.txt'
+        sh 'pip3 install -r requirements.txt'
         sh 'pyinstaller --onefile app.py'
         echo '********* Build Stage Finished **********'
         }
