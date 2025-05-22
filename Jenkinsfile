@@ -14,7 +14,7 @@ pipeline {
       steps {
         echo '********* Build Stage Started **********'
         sh 'pip3 install -r requirements.txt'
-        sh 'py2app --onefile app.py'
+        sh 'PyInstaller --onefile app.py'
         echo '********* Build Stage Finished **********'
         }
     }
