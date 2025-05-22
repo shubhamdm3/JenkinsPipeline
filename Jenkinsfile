@@ -5,7 +5,7 @@ pipeline {
     {
       steps{
         echo '********* Cleaning Workspace Stage Started **********'
-        bat 'rmdir /s /q test-reports'
+        sh 'rm -rf test-reports'
         echo '********* Cleaning Workspace Stage Finished **********'
       }
     }
@@ -13,15 +13,15 @@ pipeline {
     stage('Build Stage') {
       steps {
         echo '********* Build Stage Started **********'
-        bat 'pip install -r requirements.txt'
-        bat 'pyinstaller --onefile app.py'
+        sh 'pip install -r requirements.txt'
+        sh 'pyinstaller --onefile app.py'
         echo '********* Build Stage Finished **********'
         }
     }
     stage('Testing Stage') {
       steps {
         echo '********* Test Stage Started **********'
-        bat 'python test.py'
+        sh 'python test.py'
         echo '********* Test Stage Finished **********'
       }   
     }
@@ -35,7 +35,7 @@ pipeline {
              
              [$class: 'TextParameterDefinition', defaultValue: 'password', description: 'Artifactory Password', name: 'password']])
              
-             bat 'jfrog rt c artifactory-demo --url=http://34.68.191.118:8081/artifactory --user=admin --password='+userInput
+             sh 'jfrog rt c artifactory-demo --url=http://34.68.191.118:8081/artifactory --user=admin --password='+userInput
              
           echo '********* Configure Artifactory Finished **********'
         }
@@ -52,7 +52,7 @@ stage('Deployment Stage'){
                 echo '********* Deploy Stage Started **********'
                 timeout(time : 1, unit : 'MINUTES')
                 {
-                bat 'python app.py'
+                sh 'python app.py'
                 }
                 echo '********* Deploy Stage Finished **********'
             }
@@ -68,7 +68,7 @@ stage('Deployment Stage'){
             {
               echo '********* Uploading to Artifactory is Started **********'
               /*bat 'jfrog rt u "dist/*.exe" generic-local'*/
-              bat 'Powershell.exe -executionpolicy remotesigned -File build_script.ps1'
+              sh 'pwsh -ExecutionPolicy RemoteSigned -File build_script.ps1'
               echo '********* Uploading Finished **********'
             }
           }
