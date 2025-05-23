@@ -1,23 +1,8 @@
 pipeline {
-    agent any
-    environment {
-        PATH = "/opt/homebrew/bin:${env.PATH}"
-    }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'which python3'
-                sh 'which pip3'
-                sh 'which pyinstaller'
-                sh 'which jfrog'
-            }
-        }
-    }
-}
-
-
-pipeline {
   agent any
+    environment {
+    PATH = "/opt/homebrew/bin:${env.PATH}"
+  }
   stages {
     stage('Clean Reports')
     {
