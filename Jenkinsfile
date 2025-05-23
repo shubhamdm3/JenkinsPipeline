@@ -50,7 +50,7 @@ stage('Deployment Stage'){
             steps{
                 input "Do you want to Deploy the application?"
                 echo '********* Deploy Stage Started **********'
-                timeout(time : 1, unit : 'MINUTES')
+                timeout(time : 5, unit : 'MINUTES')
                 {
                 sh 'python3 app.py'
                 }
