@@ -35,7 +35,7 @@ pipeline {
              
              [$class: 'TextParameterDefinition', defaultValue: 'password', description: 'Artifactory Password', name: 'password']])
              
-             sh '/opt/homebrew/bin/jfrog config add artifactory-demo --url=http://34.68.191.118:8081/artifactory --user=admin --password=admin --interactive=false'
+             sh '/opt/homebrew/bin/jfrog config add artifactory-demo --url=https://34.68.191.118:8081/artifactory --user=admin --password=admin --interactive=false'
 
           echo '********* Configure Artifactory Finished **********'
         }
