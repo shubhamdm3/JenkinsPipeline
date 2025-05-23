@@ -25,22 +25,22 @@ pipeline {
         echo '********* Test Stage Finished **********'
       }   
     }
-    stage('Configure Artifactory'){
-      steps{
-        script {
+    //stage('Configure Artifactory'){
+      //steps{
+       // script {
           
-          echo '********* Configure Artifactory Started **********'
-             def userInput = input(
-             id: 'userInput', message: 'Enter password for Artifactory', parameters: [
+         // echo '********* Configure Artifactory Started **********'
+           //  def userInput = input(
+           //  id: 'userInput', message: 'Enter password for Artifactory', parameters: [
              
-             [$class: 'TextParameterDefinition', defaultValue: 'password', description: 'Artifactory Password', name: 'password']])
+           //  [$class: 'TextParameterDefinition', defaultValue: 'password', description: 'Artifactory Password', name: 'password']])
              
-             sh '/opt/homebrew/bin/jfrog config add artifactory-demo --url=https://34.68.191.118:8081/artifactory --user=admin --password=admin --interactive=false'
+           //  sh '/opt/homebrew/bin/jfrog config add artifactory-demo --url=https://34.68.191.118:8081/artifactory --user=admin --password=admin --interactive=false'
 
-          echo '********* Configure Artifactory Finished **********'
-        }
-       }
-    }
+          //echo '********* Configure Artifactory Finished **********'
+        //}
+       //}
+   // }
     stage('Sanity check') {
             steps {
                 input "Does the staging environment look ok?"
