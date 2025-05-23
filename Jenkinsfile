@@ -14,14 +14,14 @@ pipeline {
       steps {
         echo '********* Build Stage Started **********'
         sh 'pip3 install -r requirements.txt'
-        sh 'pyinstaller --onefile app.py'
+        sh '/opt/homebrew/bin/pyinstaller --onefile app.py'
         echo '********* Build Stage Finished **********'
         }
     }
     stage('Testing Stage') {
       steps {
         echo '********* Test Stage Started **********'
-        sh 'python test.py'
+        sh 'python3 test.py'
         echo '********* Test Stage Finished **********'
       }   
     }
@@ -35,7 +35,7 @@ pipeline {
              
              [$class: 'TextParameterDefinition', defaultValue: 'password', description: 'Artifactory Password', name: 'password']])
              
-             sh 'jfrog rt c artifactory-demo --url=http://34.68.191.118:8081/artifactory --user=admin --password='+userInput
+             sh '/opt/homebrew/bin/jfrog rt c artifactory-demo --url=http://34.68.191.118:8081/artifactory --user=admin --password='+userInput
              
           echo '********* Configure Artifactory Finished **********'
         }
@@ -52,7 +52,7 @@ stage('Deployment Stage'){
                 echo '********* Deploy Stage Started **********'
                 timeout(time : 1, unit : 'MINUTES')
                 {
-                sh 'python app.py'
+                sh 'python3 app.py'
                 }
                 echo '********* Deploy Stage Finished **********'
             }
